@@ -12,7 +12,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -40,10 +43,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
+        initScreenSize(getApplicationContext());
     }
 
     protected void switchFragment(int containerViewId, Fragment target) {
@@ -227,5 +227,107 @@ public abstract class BaseActivity extends AppCompatActivity {
             view.setVisibility(View.INVISIBLE);
         }
     }
+
+    //=============沉侵式==(begin)=================
+    private static View mStatusBarView;
+    public static float mDensity;
+
+    private static void initScreenSize(Context context) {
+        DisplayMetrics dm = context.getResources().getDisplayMetrics();
+        mDensity = dm.density;
+    }
+
+    /**
+     * 设置全屏沉侵式效果
+     */
+    protected void setNoStatusBarFullMode() {
+        // sdk 4.4
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
+            if (mStatusBarView != null) {
+                ViewGroup root = findViewById(android.R.id.content);
+                root.removeView(mStatusBarView);
+            }
+            return;
+        }
+
+        // sdk 5.x
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            window.setStatusBarColor(Color.TRANSPARENT);
+            return;
+        }
+    }
+
+    /**
+     * 设置控件的paddingTop, 使它不被StatusBar覆盖
+     */
+    public static void setStatusBarPadding(View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            int marginTop = getStatusBarHeight(view.getContext());
+            view.setPadding(view.getPaddingLeft(), marginTop,
+                    view.getPaddingRight(), view.getPaddingBottom());
+            return;
+        }
+    }
+
+    protected void setStatusBarColor(int statusColor) {
+
+        // sdk 5.x
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(statusColor);
+            return;
+        }
+
+        // sdk 4.4
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
+            if (mStatusBarView == null) {
+                //为了适配一些特殊机型的状态栏颜色无法改变，同时高度和系统原生的高度区别，所以这里重新创建一个View用于覆盖状态栏来实现效果
+                mStatusBarView = new View(this);
+                mStatusBarView.setBackgroundColor(statusColor);
+            } else {
+                // 先解除父子控件关系，否则重复把一个控件多次
+                // 添加到其它父控件中会出错
+                ViewParent parent = mStatusBarView.getParent();
+                if (parent != null) {
+                    ViewGroup viewGroup = (ViewGroup) parent;
+                    viewGroup.removeView(mStatusBarView);
+                }
+            }
+            ViewGroup.LayoutParams param = new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    getStatusBarHeight(this));
+            root.addView(mStatusBarView, param);
+        }
+
+    }
+
+    /**
+     * 通过反射的方式获取状态栏高度，
+     * 一般为24dp，有些可能较特殊，所以需要反射动态获取
+     */
+    private static int getStatusBarHeight(Context context) {
+        try {
+            Class<?> clazz = Class.forName("com.android.internal.R$dimen");
+            Object obj = clazz.newInstance();
+            Field field = clazz.getField("status_bar_height");
+            int id = Integer.parseInt(field.get(obj).toString());
+            return context.getResources().getDimensionPixelSize(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("-------无法获取到状态栏高度");
+        }
+        return dp2px(24);
+    }
+
+    public static int dp2px(int dp) {
+        return (int) (dp * mDensity);
+    }
+    //=============沉侵式==(end)=================
 
 }
