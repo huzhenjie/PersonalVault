@@ -24,7 +24,7 @@ public class L {
     private static final boolean canWriteErrorLogs = true;
 
     private L() {
-        // do nothing
+        throw new AssertionError("No instances.");
     }
 
     private static StackTraceElement getCallerStackTraceElement() {

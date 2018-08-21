@@ -6,6 +6,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
 public class PermissionUtil {
+    private PermissionUtil() {
+        throw new AssertionError("No instances.");
+    }
+
     private static final int PERMISSION_REQUEST_CODE = 250;
 
     public static boolean checkPermission(Activity activity, int requestCode, String... permissions) {

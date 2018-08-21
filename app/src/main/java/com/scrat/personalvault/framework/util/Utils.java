@@ -33,6 +33,10 @@ import java.util.Calendar;
 
 public class Utils {
 
+    private Utils() {
+        throw new AssertionError("No instances.");
+    }
+
     public static String formatDate(long ts) {
 
         long zeroTs = getZeroTs();
