@@ -9,13 +9,10 @@ import io.reactivex.functions.Function;
 
 public class ImgEntry extends BaseEntry {
 
-    private static final String TABLE = "img";
+    public static final String TABLE = "img";
 
-    private static final String ID = "_id";
     private static final String SIZE = "size";
     private static final String IMG_NAME = "img_name";
-    private static final String CREATED_AT = "created_at";
-    private static final String UPDATE_AT = "update_at";
     private static final String MD5 = "md5";
 
     public static final String CREATE_SQL = "create table " + TABLE + "("

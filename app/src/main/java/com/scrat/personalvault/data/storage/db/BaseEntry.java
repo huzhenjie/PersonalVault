@@ -5,6 +5,11 @@ import android.database.Cursor;
 public class BaseEntry {
     public static final int BOOLEAN_FALSE = 0;
     public static final int BOOLEAN_TRUE = 1;
+
+    public static final String ID = "_id";
+    public static final String CREATED_AT = "created_at";
+    public static final String UPDATE_AT = "update_at";
+
     protected static final String PRIMARY_KEY = " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT";
     protected static final String TEXT = " TEXT NOT NULL DEFAULT ''";
     protected static final String NUMBER = " INTEGER NOT NULL DEFAULT 0";

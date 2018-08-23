@@ -4,20 +4,22 @@ import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.db.SupportSQLiteOpenHelper;
 
 import com.scrat.personalvault.data.storage.img.ImgEntry;
+import com.scrat.personalvault.framework.util.L;
 
 public class DbCallback extends SupportSQLiteOpenHelper.Callback {
 
     public DbCallback(int version) {
-        super(Config.VERSION);
+        super(version);
     }
 
     @Override
     public void onCreate(SupportSQLiteDatabase db) {
+        L.i("[DB] create table");
         db.execSQL(ImgEntry.CREATE_SQL);
     }
 
     @Override
     public void onUpgrade(SupportSQLiteDatabase db, int oldVersion, int newVersion) {
-
+        L.i("[DB] oldVersion=%s newVersion=%s", oldVersion, newVersion);
     }
 }
