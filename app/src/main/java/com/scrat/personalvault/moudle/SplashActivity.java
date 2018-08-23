@@ -14,7 +14,7 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
 
         findViewById(R.id.app_name).postDelayed(() -> {
-            MainActivity.show(getApplicationContext());
+            MainActivity.show(SplashActivity.this);
             finish();
         }, 1000L);
     }
