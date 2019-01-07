@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -21,7 +20,7 @@ import android.support.v4.content.ContextCompat;
 import android.text.format.DateFormat;
 import android.util.TypedValue;
 
-import com.scrat.personalvault.BuildConfig;
+import com.scrat.lib.uitl.L;
 import com.scrat.personalvault.R;
 
 import java.io.File;
@@ -92,54 +91,8 @@ public class Utils {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics());
     }
 
-    public static String getVersionName(Context applicationContext) {
-        String versionName = "";
-        try {
-            String pkName = applicationContext.getPackageName();
-            versionName = applicationContext.getPackageManager().getPackageInfo(pkName, 0).versionName;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (BuildConfig.DEBUG) {
-            versionName += ".debug";
-        }
-        return versionName;
-    }
-
-    public static int getVersionCode(Context applicationContext) {
-        try {
-            String pkName = applicationContext.getPackageName();
-            return applicationContext.getPackageManager().getPackageInfo(pkName, 0).versionCode;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 1;
-    }
-
-    public static String getChannelName(Context ctx) {
-        String channelName = "";
-        if (ctx == null) {
-            return channelName;
-        }
-        try {
-            PackageManager packageManager = ctx.getPackageManager();
-            if (packageManager != null) {
-                ApplicationInfo applicationInfo = packageManager.getApplicationInfo(ctx.getPackageName(), PackageManager.GET_META_DATA);
-                if (applicationInfo != null) {
-                    if (applicationInfo.metaData != null) {
-                        channelName = applicationInfo.metaData.getString("UMENG_CHANNEL");
-                    }
-                }
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return channelName;
-    }
-
     public static boolean checkPermission(
             @NonNull Activity activity, String[] permissions, int requestCode) {
-
         boolean granted = true;
         for (String permission : permissions) {
             int permissionCode = ContextCompat.checkSelfPermission(activity, permission);

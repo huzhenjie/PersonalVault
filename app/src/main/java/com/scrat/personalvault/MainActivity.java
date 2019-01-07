@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 
-import com.scrat.personalvault.framework.common.BaseActivity;
+import com.scrat.lib.framework.BaseActivity;
 
 public class MainActivity extends BaseActivity {
 

@@ -3,8 +3,8 @@ package com.scrat.personalvault.data.storage.db;
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.db.SupportSQLiteOpenHelper;
 
+import com.scrat.lib.uitl.L;
 import com.scrat.personalvault.data.storage.img.ImgEntry;
-import com.scrat.personalvault.framework.util.L;
 
 public class DbCallback extends SupportSQLiteOpenHelper.Callback {
 

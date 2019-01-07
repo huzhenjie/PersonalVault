@@ -2,7 +2,7 @@ package com.scrat.personalvault.data.storage;
 
 import android.content.Context;
 
-import com.scrat.personalvault.framework.common.BaseSharedPreferences;
+import com.scrat.lib.framework.BaseSharedPreferences;
 
 public class Preferences extends BaseSharedPreferences {
     private static final String FILE_NAME = "conf";

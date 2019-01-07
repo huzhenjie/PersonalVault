@@ -6,7 +6,7 @@ import android.arch.persistence.db.SupportSQLiteOpenHelper.Factory;
 import android.arch.persistence.db.framework.FrameworkSQLiteOpenHelperFactory;
 import android.content.Context;
 
-import com.scrat.personalvault.framework.util.L;
+import com.scrat.lib.uitl.L;
 import com.squareup.sqlbrite3.BriteDatabase;
 import com.squareup.sqlbrite3.SqlBrite;
 
