@@ -6,8 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.scrat.personalvault.BR;
-
 public class BaseRecyclerViewHolder extends RecyclerView.ViewHolder {
     public static BaseRecyclerViewHolder newInstance(ViewDataBinding binding) {
         return new BaseRecyclerViewHolder(binding);
@@ -26,9 +24,8 @@ public class BaseRecyclerViewHolder extends RecyclerView.ViewHolder {
         this.binding = binding;
     }
 
-    public void bind(Object obj) {
-        // TODO
-//        binding.setVariable(BR.item, obj);
+    public void bind(int variableId, Object obj) {
+        binding.setVariable(variableId, obj);
         binding.executePendingBindings();
     }
 

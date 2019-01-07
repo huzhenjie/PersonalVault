@@ -27,7 +27,6 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
     public void onBindViewHolder(@NonNull BaseRecyclerViewHolder holder, int position) {
         T t = getItem(position);
         if (t != null) {
-            holder.bind(t);
             onBindViewHolder(holder, position, t);
         }
     }
