@@ -35,6 +35,10 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".moudle.pincode.PinCodeActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

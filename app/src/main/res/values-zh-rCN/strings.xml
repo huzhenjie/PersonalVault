@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Person Vault</string>
     <string name="action_settings">设置</string>
+
+    <string name="enter_your_pwd">输入密码</string>
+    <string name="enter_a_new_pwd">输入新密码</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="forgot_password">忘记密码</string>
 </resources>

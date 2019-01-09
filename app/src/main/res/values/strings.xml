@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Personal Vault</string>
     <string name="action_settings">Settings</string>
+
+    <string name="enter_your_pwd">Enter your password</string>
+    <string name="enter_a_new_pwd">Enter a new password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="forgot_password">Forgot password</string>
 </resources>

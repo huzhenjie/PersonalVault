@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="com.scrat.personalvault.moudle.pincode.model.PinCodeViewModel" />
+
+        <variable
+            name="handler"
+            type="com.scrat.personalvault.moudle.pincode.model.PinCodeHandler" />
+    </data>
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/back"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:contentDescription="@null"
+                android:visibility="@{item.showBackBtn() ? View.VISIBLE : View.INVISIBLE}"
+                app:srcCompat="@drawable/ic_chevron_left_light_24dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@{item.title ?? @string/enter_your_pwd}"
+                android:textColor="@color/colorText"
+                android:textSize="18sp" />
+
+            <ImageButton
+                android:id="@+id/more"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:contentDescription="@null"
+                android:visibility="@{item.showMoreBtn() ? View.VISIBLE : View.INVISIBLE}"
+                app:srcCompat="@drawable/ic_more_vert_light_24dp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/pwd_placeholder"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_centerInParent="true"
+                android:layout_margin="16dp"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp">
+
+                <ImageView
+                    style="@style/pwdPlaceholderImg"
+                    android:contentDescription="@null"
+                    android:visibility="@{item.currPwdLength > 0 ? View.VISIBLE : View.GONE}"
+                    app:srcCompat="@drawable/ic_lock_light_24dp" />
+
+                <ImageView
+                    style="@style/pwdPlaceholderImg"
+                    android:contentDescription="@null"
+                    android:visibility="@{item.currPwdLength > 1 ? View.VISIBLE : View.GONE}"
+                    app:srcCompat="@drawable/ic_lock_light_24dp" />
+
+                <ImageView
+                    style="@style/pwdPlaceholderImg"
+                    android:contentDescription="@null"
+                    android:visibility="@{item.currPwdLength > 2 ? View.VISIBLE : View.GONE}"
+                    app:srcCompat="@drawable/ic_lock_light_24dp" />
+
+                <ImageView
+                    style="@style/pwdPlaceholderImg"
+                    android:contentDescription="@null"
+                    android:visibility="@{item.currPwdLength > 3 ? View.VISIBLE : View.GONE}"
+                    app:srcCompat="@drawable/ic_lock_light_24dp" />
+
+                <ImageView
+                    style="@style/pwdPlaceholderImg"
+                    android:contentDescription="@null"
+                    android:visibility="@{item.currPwdLength > 4 ? View.VISIBLE : View.GONE}"
+                    app:srcCompat="@drawable/ic_lock_light_24dp" />
+
+                <ImageView
+                    style="@style/pwdPlaceholderImg"
+                    android:contentDescription="@null"
+                    android:visibility="@{item.currPwdLength > 5 ? View.VISIBLE : View.GONE}"
+                    app:srcCompat="@drawable/ic_lock_light_24dp" />
+            </LinearLayout>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:contentDescription="@null"
+                android:paddingLeft="16dp"
+                android:onClick="@{()->handler.handleDeleteLastKey()}"
+                android:paddingRight="16dp"
+                android:visibility="@{item.currPwdLength > 0 ? View.VISIBLE : View.GONE}"
+                app:srcCompat="@drawable/ic_backspace_light_24dp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/colorText" />
+
+        <LinearLayout style="@style/PinCodeContainer">
+
+            <TextView
+                style="@style/PinCode"
+                android:onClick='@{()->handler.handlePinCode("1")}'
+                android:text="1" />
+
+            <TextView
+                style="@style/PinCode"
+                android:onClick='@{()->handler.handlePinCode("2")}'
+                android:text="2" />
+
+            <TextView
+                style="@style/PinCode"
+                android:onClick='@{()->handler.handlePinCode("3")}'
+                android:text="3" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/PinCodeContainer">
+
+            <TextView
+                style="@style/PinCode"
+                android:onClick='@{()->handler.handlePinCode("4")}'
+                android:text="4" />
+
+            <TextView
+                style="@style/PinCode"
+                android:onClick='@{()->handler.handlePinCode("5")}'
+                android:text="5" />
+
+            <TextView
+                style="@style/PinCode"
+                android:onClick='@{()->handler.handlePinCode("6")}'
+                android:text="6" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/PinCodeContainer">
+
+            <TextView
+                style="@style/PinCode"
+                android:onClick='@{()->handler.handlePinCode("7")}'
+                android:text="7" />
+
+            <TextView
+                style="@style/PinCode"
+                android:onClick='@{()->handler.handlePinCode("8")}'
+                android:text="8" />
+
+            <TextView
+                style="@style/PinCode"
+                android:onClick='@{()->handler.handlePinCode("9")}'
+                android:text="9" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/PinCodeContainer">
+
+            <View
+                style="@style/PinCode"
+                android:foreground="@null" />
+
+            <TextView
+                style="@style/PinCode"
+                android:onClick='@{()->handler.handlePinCode("0")}'
+                android:text="0" />
+
+            <View
+                style="@style/PinCode"
+                android:foreground="@null" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:autoLink="all"
+            android:text="@string/forgot_password"
+            android:textColor="@color/colorText"
+            android:visibility="@{item.showForgotPwdBtn() ? View.VISIBLE : View.INVISIBLE}" />
+
+    </LinearLayout>
+</layout>
